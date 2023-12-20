@@ -8,8 +8,6 @@ const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "localhost";
 const app = express();
 
-app.use(express.json());
-
 const pool = mariadb.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -19,8 +17,8 @@ const pool = mariadb.createPool({
     connectionLimit: 5
 })
 
-
 app.use(cors())
+app.use(express.json());
 
 app.get("/", async (req, res) => {
     let connection;
@@ -29,7 +27,6 @@ app.get("/", async (req, res) => {
         const data = await connection.query(
             "SELECT * FROM ideas;"
         )
-        
         res.send(data)
     } catch (error) {
         throw error
@@ -37,6 +34,8 @@ app.get("/", async (req, res) => {
         if (connection) connection.end()
     }
 })
+
+
 
 app.delete("/delete/:id", async (req, res) => {
     let connection;

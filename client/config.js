@@ -4,4 +4,4 @@ const environment = {
 
 }
 
-export default environment
+export default environment;
