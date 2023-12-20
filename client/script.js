@@ -1,8 +1,9 @@
-import environment from "./config";
+import environment from "./config.js";
 const listBox = document.querySelector(".list-of-ideas");
 
+
 (async () => {
-    const response = await fetch(environment.base_url, {
+    const response = await fetch(environment.backend_url, {
         method: "GET",
     })
     const data = await response.json();
