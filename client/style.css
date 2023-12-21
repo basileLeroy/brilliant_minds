@@ -1,6 +1,7 @@
 :root {
     --main-text-color: #7fffd4;
     --title-initials-color: #02df95;
+    --main-box-shadow: #61b6f224;
 }
 
 * {
@@ -60,20 +61,28 @@ body main .list-of-ideas {
 }
 
 body main .list-of-ideas .card {
+    position: relative;
     display: flex;
     flex-direction: column;
     
     justify-content: center;
-    align-items: center;
+    align-items: start;
     padding: 30px;
     border-radius: 5px;
 
+    box-shadow: var(--main-box-shadow) 0px 1px 1px, var(--main-box-shadow) 0px 2px 2px, var(--main-box-shadow) 0px 4px 4px, var(--main-box-shadow) 0px 4px 4px, var(--main-box-shadow) 0px 16px 16px;
     /* From https://css.glass */
-    background: rgba(255, 255, 255, 0.4);
+    /* background: rgba(255, 255, 255, 0.4);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(0px);
-    -webkit-backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px); */
     border: 1px solid rgba(255, 255, 255, 0.67);
+}
+
+body main .list-of-ideas .card h3 {
+    font-size: 28px;
+    color: #61B6F2;
+    justify-self: flex-start;
 }
 
 body main .list-of-ideas .card .card-body {
@@ -82,3 +91,11 @@ body main .list-of-ideas .card .card-body {
     gap: 20px;
 }
 
+body main .list-of-ideas .card .card-body .buttons {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    top: 5px;
+    right: 5px;
+}

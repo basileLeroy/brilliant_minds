@@ -17,7 +17,13 @@ const pool = mariadb.createPool({
     connectionLimit: 5
 })
 
-app.use(cors())
+const allowlist = [process.env.CLIENT_BASE_URL, 'http://localhost:5500', 'http://127.0.0.1:5500']
+const corsOptionsDelegate = {
+    origin: allowlist,
+}
+app.use(cors({
+    origin: allowlist,
+}))
 app.use(express.json());
 
 app.get("/", async (req, res) => {

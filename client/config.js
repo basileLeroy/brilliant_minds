@@ -1,5 +1,5 @@
 const environment = {
-    backend_url : "https://brilliantminds-imz3n380.b4a.run",
+    backend_url : "http://localhost:3070",
     mode: "Production",
 
 }
