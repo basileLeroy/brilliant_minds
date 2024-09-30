@@ -1,14 +1,12 @@
 import environment from "./config.js";
 const listBox = document.querySelector(".list-of-ideas");
 
-
 document.addEventListener('DOMContentLoaded', async () => {
-    const response = await fetch(environment.backend_url, {
-        method: "GET",
-    })
+    const response = await fetch("http://localhost:3070/")
     const data = await response.json();
 
     data.forEach(idea => {
+        // create elements
         const container = document.createElement('div');
         container.className = "card"
 
@@ -35,12 +33,23 @@ document.addEventListener('DOMContentLoaded', async () => {
         updateIcon.alt = "edit button for " + idea.title;
         updateIcon.title = "edit button for " + idea.title;
 
-        buttonBox.append(updateIcon, deleteIcon)
+        // Delete idea
+        deleteIcon.addEventListener("click", async () => {
+            console.log(idea.id)
+            const response = await fetch(environment.backend_url + "/delete", 
+                {
+                    method:"DELETE", 
+                    body:JSON.stringify({id:idea.id}), 
+                    headers: {'Content-type': 'application/json; charset=UTF-8'}
+                }
+            )
+            const data = await response.json();
 
-        deleteIcon.addEventListener('click', () => {
-            console.log("clicked idea number : " + idea.id)
+            if (data.query) location.reload();
+
         })
 
+        buttonBox.append(updateIcon, deleteIcon)
         textBody.append(description, buttonBox)
         container.append(title, textBody);
         listBox.append(container);

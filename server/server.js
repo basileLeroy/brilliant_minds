@@ -6,6 +6,7 @@ config();
 
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "localhost";
+
 const app = express();
 
 const pool = mariadb.createPool({
@@ -18,9 +19,7 @@ const pool = mariadb.createPool({
 })
 
 const allowlist = [process.env.CLIENT_BASE_URL, 'http://localhost:5500', 'http://127.0.0.1:5500']
-const corsOptionsDelegate = {
-    origin: allowlist,
-}
+
 app.use(cors({
     origin: allowlist,
 }))
@@ -41,33 +40,29 @@ app.get("/", async (req, res) => {
     }
 })
 
+app.post("/new", (req, res) => {
+    console.log(req.body)
 
-
-app.delete("/delete/:id", async (req, res) => {
-    let connection;
     try {
-        connection = await pool.getConnection();
-        const prepare = await connection.prepare(
-            "DELETE FROM ideas WHERE id = ?;"
-        )
-        const data = await prepare.execute([req.params.id])
-        res.send(data)
-    } catch (error) {
-        throw error;
+        // create a new database instance
+        res.status(200).send("ok");
+    } catch (err) {
+        res.status(503).send(err)
     } finally {
-        if (connection) connection.end();
+
     }
+
+    res.status(200).send();
 })
 
-app.get("/ideas/:id", async (req, res) => {
+app.delete("/delete", async (req, res) => {
     let connection;
     try {
         connection = await pool.getConnection();
-        const prepare = await connection.prepare(
-            "SELECT * FROM ideas WHERE id = ?"
-        )
-        const data = await prepare.execute([req.params.id])
-        res.send(data)
+        const statement = await connection.prepare("DELETE FROM ideas WHERE id=?")
+        await statement.execute([req.body.id])
+        
+        res.send({query:true})
     } catch (error) {
         throw error;
     } finally {
