@@ -49,7 +49,6 @@ app.post("/new", async (req, res) => {
         conn = await pool.getConnection();
         const statement = await conn.prepare("INSERT INTO brilliant_minds.ideas (title, description) VALUES (?,?)")
         await statement.execute([req.body.title, req.body.description]);
-        // create a new database instance
         res.status(200).send("ok");
     } catch (err) {
         res.status(503).send(err)
