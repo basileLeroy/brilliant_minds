@@ -64,8 +64,9 @@ app.delete("/delete", async (req, res) => {
         const statement = await connection.prepare("DELETE FROM ideas WHERE id=?")
         await statement.execute([req.body.id])
         
-        res.send({query:true})
+        res.status(200).send("ok");
     } catch (error) {
+        res.status(503).send(err)
         throw error;
     } finally {
         if (connection) connection.end();
