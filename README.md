@@ -12,7 +12,9 @@ HOST=localhost
 
 DB_PORT=3306
 DB_HOST=localhost
-DB_USER=root
-DB_PASS=root
+DB_USER=
+DB_PASS=
 DB_NAME=brilliant_minds
 ```
+
+> Note: You will have to create a **Database** first called "brilliant_minds" with a **table** called "ideas" (title, description)
