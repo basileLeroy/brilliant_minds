@@ -15,16 +15,20 @@ const createNewIdea = async (event) => {
             },
             body: JSON.stringify({
                 title: title,
-                description: description
+                description: ""
             })
         }
 
-        const result = await fetch(`${environment.backend_url}/new`, options)
-        const response = await result.json()
+        try {
+            const result = await fetch(`${environment.backend_url}/new`, options)
+            const response = await result.json()
+            
+            if (response.message === "OK") window.location = "../../";
 
-        console.log(response)
+        } catch (err) {
+            console.log(err)
+        }
 
-        
     } else {
         alert('ERROR: Empty input fields found.')
     }
