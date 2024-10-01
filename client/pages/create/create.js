@@ -15,7 +15,7 @@ const createNewIdea = async (event) => {
             },
             body: JSON.stringify({
                 title: title,
-                description: ""
+                description: description
             })
         }
 
@@ -24,6 +24,7 @@ const createNewIdea = async (event) => {
             const response = await result.json()
             
             if (response.message === "OK") window.location = "../../";
+            
 
         } catch (err) {
             console.log(err)
