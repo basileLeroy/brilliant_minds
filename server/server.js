@@ -42,14 +42,13 @@ app.get("/", async (req, res) => {
 
 // Extra; Add middleware to check for req.body to have the right values
 app.post("/new", async (req, res) => {
-
     let conn;
-
     try {
         conn = await pool.getConnection();
         const statement = await conn.prepare("INSERT INTO brilliant_minds.ideas (title, description) VALUES (?,?)")
         await statement.execute([req.body.title, req.body.description]);
-        res.status(200).send("ok");
+        
+        res.status(200).json({message: "OK"});
     } catch (err) {
         res.status(503).send(err)
     } finally {
@@ -64,7 +63,7 @@ app.delete("/delete", async (req, res) => {
         const statement = await connection.prepare("DELETE FROM ideas WHERE id=?")
         await statement.execute([req.body.id])
         
-        res.status(200).send("ok");
+        res.status(200).json({message: "OK"});
     } catch (error) {
         res.status(503).send(err)
         throw error;
