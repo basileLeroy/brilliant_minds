@@ -2,6 +2,7 @@ import express from "express";
 import { config } from "dotenv";
 import cors from 'cors';
 import mariadb from "mariadb"
+import { checkCreateParams } from "./middlewares.js"
 config();
 
 const PORT = process.env.PORT || 3000;
@@ -41,13 +42,13 @@ app.get("/", async (req, res) => {
 })
 
 // Extra; Add middleware to check for req.body to have the right values
-app.post("/new", async (req, res) => {
+app.post("/new", checkCreateParams, async (req, res) => {
     let conn;
     try {
         conn = await pool.getConnection();
         const statement = await conn.prepare("INSERT INTO brilliant_minds.ideas (title, description) VALUES (?,?)")
         await statement.execute([req.body.title, req.body.description]);
-        
+
         res.status(200).json({message: "OK"});
     } catch (err) {
         res.status(503).send(err)
