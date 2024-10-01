@@ -110,3 +110,7 @@ body main .list-of-ideas .card .card-body .buttons {
     top: 5px;
     right: 5px;
 }
+
+main .list-of-ideas .card .card-body .buttons .delete {
+    cursor: pointer;
+}
