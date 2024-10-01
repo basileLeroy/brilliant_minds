@@ -3,20 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Create New Idea</title>
     <link rel="stylesheet" href="create.css">
-    <script type="module" src="create.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" href="../../assets/Logo.svg">
+
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Lobster&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <script type="module" src="./create.js" defer></script>
 </head>
 <body>
-    <form>
-        <label>
-            Title
-            <input type="text" name="title" id="title">
-        </label>
-        <label>
-            Title
-            <textarea type="text" name="description" id="description"></textarea>
-        </label>
-    </form>
+    <header role="navigation" id="header">
+        <a href="../../" id="logo">
+            <img src="../../assets/Logo.svg" id="logo-img" alt="logo: a light bulb that slightly looks like a human head">
+        
+            <h1 id="host"><span id="initial">B</span>rilliant <span id="initial">M</span>inds.</h1>
+        </a>
+    </header>
+    <main>
+        <form class="create-form" method="POST">
+            <label>
+                Title
+                <input type="text" name="title" id="title">
+            </label>
+            <label>
+                Description
+                <textarea type="text" name="description" id="description"></textarea>
+            </label>
+            <button type="submit">Save !</button>
+        </form> 
+    </main>
+
 </body>
 </html>
